@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>Suomi-seikkailu | Verbos en finés</title>
+<style>
+:root{--blue:#005b9a;--deep:#073b66;--ice:#eaf6ff;--white:#fff;--red:#e84c4f;--green:#16864a;--ink:#17324d;--gold:#ffd45a}
+*{box-sizing:border-box}body{margin:0;font-family:"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eaf6ff 0%,#fff 55%,#eaf6ff 100%);min-height:100vh}
+button{font:inherit;cursor:pointer;border:0}.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(14px,4vw,48px);background:#fff;border-bottom:4px solid var(--blue);gap:12px}
+.brand{font-weight:900;color:var(--deep);font-size:clamp(18px,3vw,25px)}.flag{width:54px;height:34px;border:1px solid #d7e2eb;background:linear-gradient(to right,transparent 0 30%,#1265a3 30% 43%,transparent 43%),linear-gradient(to bottom,transparent 0 38%,#1265a3 38% 62%,transparent 62%);background-color:white;border-radius:4px;box-shadow:0 2px 4px #0002}
+.wrap{width:min(1100px,94vw);margin:24px auto 50px}.screen{display:none}.screen.active{display:block}
+.hero{position:relative;overflow:hidden;text-align:center;background:white;border:3px solid var(--blue);border-radius:28px;padding:clamp(24px,5vw,54px);box-shadow:0 9px 0 #b8d9ef}
+h1{font-size:clamp(32px,6vw,58px);color:var(--deep);margin:8px 0}.hero p{font-size:clamp(16px,2.4vw,20px);max-width:680px;margin:12px auto 24px;line-height:1.5}.mascot{font-size:clamp(54px,10vw,90px);margin:8px}.primary{background:var(--blue);color:white;padding:14px 28px;border-radius:999px;font-weight:900;box-shadow:0 5px 0 var(--deep);transition:.15s}.primary:hover{transform:translateY(-2px)}.primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--deep)}
+.decor{position:absolute;font-size:clamp(28px,5vw,48px);opacity:.8}.d1{left:4%;top:12%}.d2{right:5%;top:18%}.d3{left:8%;bottom:9%}.d4{right:8%;bottom:8%}
+.level-board{background:#fff;border:3px solid var(--blue);border-radius:18px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 #b8d9ef;margin-bottom:18px}.level-board small{color:var(--blue);font-weight:900;letter-spacing:2px;text-transform:uppercase}.level-board h2{font-size:clamp(23px,4vw,34px);margin:5px 0;color:var(--deep)}
+.level-map{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0}.level-tile{background:white;border:2px solid #b6d5e9;border-radius:16px;padding:14px 8px;text-align:center;min-height:112px;color:var(--ink);font-weight:800}.level-tile .num{display:block;font-size:28px;color:var(--blue)}.level-tile.locked{opacity:.48;filter:grayscale(1);cursor:not-allowed}.level-tile.done{border-color:var(--green);background:#effaf3}.level-tile:not(.locked):hover{transform:translateY(-3px)}
+.progressline{height:12px;background:#d7eaf7;border-radius:20px;overflow:hidden;margin:12px 0}.progressline span{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
+.hud{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}.pill{background:white;border:2px solid #c5deef;border-radius:999px;padding:8px 14px;font-weight:800}
+.instructions{text-align:center;margin:12px auto 18px;line-height:1.45}.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.column{background:#ffffffc9;border:2px solid #c6deef;border-radius:18px;padding:14px}.column h3{text-align:center;color:var(--deep);margin:2px 0 12px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.match-card{min-height:95px;border:2px solid #d0e3f1;border-radius:13px;background:white;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--ink);font-weight:800;position:relative;transition:.15s;overflow:hidden}.match-card:hover{border-color:var(--blue);transform:translateY(-2px)}.match-card.selected{border:3px solid var(--blue);background:#eaf6ff;box-shadow:0 0 0 3px #005b9a22}.match-card.matched{border-color:var(--green);background:#eaf8ef;opacity:.7;cursor:default}.match-card.wrong{border-color:var(--red);background:#fff0f0;animation:shake .25s}.picture{font-size:37px;line-height:1.15;filter:drop-shadow(0 2px 1px #0001)}.verb{font-size:clamp(13px,1.7vw,17px)}.translation{font-size:11px;color:#638096;font-weight:600}.mark{position:absolute;right:5px;top:2px;font-size:22px}
+.feedback{min-height:36px;text-align:center;font-weight:900;margin:12px 0;color:var(--deep)}.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.result{background:white;border:3px solid var(--blue);border-radius:24px;text-align:center;padding:30px 18px;box-shadow:0 8px 0 #b8d9ef}.result .big{font-size:72px}.result h2{font-size:clamp(25px,5vw,40px);color:var(--deep);margin:8px}.result p{font-size:18px;line-height:1.5}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}.secondary{background:#eaf6ff;color:var(--deep);border:2px solid #9fc7e2;padding:12px 20px;border-radius:999px;font-weight:900}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}.confetti i{position:absolute;top:-20px;width:10px;height:17px;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+footer{text-align:center;color:#5d7c93;font-size:13px;padding:0 12px 25px}
+@media(max-width:700px){.level-map{grid-template-columns:repeat(2,1fr)}.game-grid{grid-template-columns:1fr}.column{padding:10px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.match-card{min-height:82px}.picture{font-size:32px}.level-tile:last-child{grid-column:span 2}}
+@media(max-width:380px){.cards{gap:6px}.match-card{padding:5px}.verb{font-size:12px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">🇫🇮 SUOMI-SEIKKAILU</div><div class="flag" role="img" aria-label="Bandera de Finlandia"></div></header>
+<main class="wrap">
+<section id="home" class="screen active">
+ <div class="hero">
+  <span class="decor d1">🌲</span><span class="decor d2">🫎</span><span class="decor d3">❄️</span><span class="decor d4">🏡</span>
+  <div class="mascot">🧑🏻‍🎓 🐻‍❄️</div><h1>¡Hola, estudiante!</h1>
+  <p>¡Bienvenido/a a <b>Suomi-seikkailu</b>, tu aventura para aprender verbos en finés! Relaciona cada ilustración con el verbo correcto y desbloquea los cinco niveles.</p>
+  <p>🎯 <b>100 verbos</b> · 5 niveles · ¡Una aventura finlandesa!</p>
+  <button class="primary" onclick="showMap()">¡Comenzar! 🚀</button>
+ </div>
+</section>
+<section id="map" class="screen">
+ <div class="level-board"><small>Tu aventura finlandesa</small><h2>Elige tu siguiente desafío</h2><div class="progressline"><span id="mapProgress"></span></div><div id="mapCount">0 de 5 niveles completados</div></div>
+ <div class="level-map" id="levelMap"></div>
+ <div style="text-align:center"><button class="secondary" onclick="goHome()">← Inicio</button></div>
+</section>
+<section id="game" class="screen">
+ <div class="level-board"><small id="levelKicker">Nivel 1</small><h2 id="levelName">Primeros pasos</h2><div class="progressline"><span id="gameProgress"></span></div><div id="gameCount">0 / 20 parejas</div></div>
+ <div class="hud"><span class="pill" id="mistakes">❌ Errores: 0</span><span class="pill" id="matchedCount">✅ Aciertos: 0</span><button class="secondary" onclick="showMap()">← Niveles</button></div>
+ <p class="instructions">Primero toca una <b>ilustración</b> y después elige el <b>verbo en finés</b> que corresponde. ¡Puedes hacerlo!</p>
+ <div class="game-grid">
+  <div class="column"><h3>🖼️ ¿Qué está pasando?</h3><div class="cards" id="pictureCards"></div></div>
+  <div class="column"><h3>💬 Encuentra el verbo</h3><div class="cards" id="verbCards"></div></div>
+ </div>
+ <div class="feedback" id="feedback" aria-live="polite">¡Relaciona las 20 parejas!</div>
+</section>
+<section id="levelResult" class="screen"><div class="result"><div class="big" id="resultEmoji">🎉</div><h2 id="resultTitle">¡Nivel completado!</h2><p id="resultText"></p><div class="actions" id="resultActions"></div></div></section>
+<section id="final" class="screen"><div class="result"><div class="big">🏆</div><h2>¡MESTARI! ¡Lo lograste!</h2><p>¡Has completado los cinco niveles y aprendido 100 verbos en finés! Tu aventura apenas comienza. <br>🇫🇮 Hyvää työtä! — ¡Buen trabajo!</p><div class="actions"><button class="primary" onclick="restartAll()">Jugar de nuevo ↻</button><button class="secondary" onclick="showMap()">Ver niveles</button></div></div></section>
+</main>
+<footer>Hecho para aprender finés paso a paso · Opi suomea! 🇫🇮</footer>
+<div class="confetti" id="confetti"></div>
+<script>
+const levels = [
+ {name:"¡Hola, Finlandia!",subtitle:"Verbos esenciales",data:[
+ ["olla","ser / estar","🙂"],["asua","vivir / residir","🏠"],["syödä","comer","🍎"],["juoda","beber","🥛"],["nukkua","dormir","😴"],["herätä","despertarse","⏰"],["mennä","ir","🚶"],["tulla","venir","👋"],["tehdä","hacer","🛠️"],["puhua","hablar","🗣️"],["kuunnella","escuchar","🎧"],["katsoa","mirar / ver","👀"],["lukea","leer","📖"],["kirjoittaa","escribir","✍️"],["oppia","aprender","💡"],["opiskella","estudiar","📚"],["työskennellä","trabajar","💼"],["pelata","jugar (deporte/juego)","⚽"],["soittaa","llamar / tocar instrumento","🎸"],["tykätä","gustar","💗"]
+ ]},
+ {name:"Por la ciudad",subtitle:"Movimiento y actividades",data:[
+ ["kävellä","caminar","🚶‍♀️"],["juosta","correr","🏃"],["ajaa","conducir","🚗"],["matkustaa","viajar","🧳"],["lentää","volar","✈️"],["uida","nadar","🏊"],["tanssia","bailar","💃"],["laulaa","cantar","🎤"],["nauraa","reír","😂"],["itkeä","llorar","😭"],["istua","sentarse","🪑"],["seistä","estar de pie","🧍"],["odottaa","esperar","⌛"],["ostaa","comprar","🛍️"],["maksaa","pagar","💳"],["etsiä","buscar","🔎"],["löytää","encontrar","🧭"],["avata","abrir","🚪"],["sulkea","cerrar","🔒"],["kantaa","llevar / cargar","📦"]
+ ]},
+ {name:"En casa y en la cocina",subtitle:"Rutinas cotidianas",data:[
+ ["kokata","cocinar","👩‍🍳"],["leipoa","hornear","🥧"],["pestä","lavar","🧼"],["siivota","limpiar","🧹"],["suihkussa käydä","ducharse","🚿"],["pukeutua","vestirse","👕"],["riisuutua","desvestirse","🧥"],["harjata","cepillar","🪥"],["syöttää","dar de comer","🐈"],["ruokkia","alimentar","🐦"],["korjata","reparar","🔧"],["rakentaa","construir","🧱"],["maalata","pintar","🎨"],["piirtää","dibujar","✏️"],["kasvattaa","cultivar / criar","🌱"],["kasvaa","crecer","🌳"],["kerätä","recoger / recolectar","🍄"],["heittää","lanzar","🏀"],["pudottaa","dejar caer","📉"],["valita","elegir","☝️"]
+ ]},
+ {name:"Habla y descubre",subtitle:"Comunicación y pensamiento",data:[
+ ["kysyä","preguntar","❓"],["vastata","responder","💬"],["kertoa","contar / relatar","📢"],["selittää","explicar","🧑‍🏫"],["ymmärtää","entender","🧠"],["muistaa","recordar","🗂️"],["unohtaa","olvidar","🤔"],["ajatella","pensar","💭"],["tietää","saber","📘"],["tuntea","sentir / conocer","❤️"],["uskoa","creer","🙏"],["toivoa","esperar / desear","🌠"],["haluta","querer","🙋"],["tarvita","necesitar","🆘"],["yrittää","intentar","🧗"],["onnistua","tener éxito","🏅"],["epäonnistua","fracasar","🥀"],["päättää","decidir","⚖️"],["suunnitella","planear","🗓️"],["suositella","recomendar","👍"]
+ ]},
+ {name:"¡Aventura avanzada!",subtitle:"Verbos para expresarte mejor",data:[
+ ["aloittaa","comenzar","🚦"],["lopettaa","terminar / dejar","🏁"],["jatkaa","continuar","➡️"],["muuttaa","mudarse / cambiar","📦"],["palata","regresar","↩️"],["saapua","llegar","🚉"],["lähteä","salir / partir","🚌"],["tavata","encontrarse con alguien","🤝"],["auttaa","ayudar","🫶"],["hoitaa","cuidar / atender","🩺"],["käyttää","usar","🖥️"],["lainata","pedir prestado / prestar","📚"],["säästää","ahorrar","🐖"],["ansaita","ganar (dinero)","💶"],["valmistaa","preparar / fabricar","🍲"],["tapahtua","suceder","⚡"],["muodostaa","formar / constituir","🧩"],["vaikuttaa","influir / parecer","🌊"],["kehittää","desarrollar / mejorar","🧪"],["suhtautua","tomar una actitud hacia","🧭"]
+ ]}
+];
+let unlocked=1, completed=new Set(), current=0, matched=new Set(), mistakes=0, selectedPic=null, selectedVerb=null, busy=false, deck=[];
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+function goHome(){show("home")}
+function showMap(){renderMap();show("map")}
+function renderMap(){
+ $("levelMap").innerHTML="";
+ levels.forEach((l,i)=>{let n=i+1,done=completed.has(n),locked=n>unlocked;let b=document.createElement("button");b.className="level-tile"+(locked?" locked":"")+(done?" done":"");b.disabled=locked;b.innerHTML=`<span class="num">${done?"✓":locked?"🔒":n}</span>${l.name}<br><small>${done?"Completado":locked?"Bloqueado":l.subtitle}</small>`;b.onclick=()=>startLevel(i);$("levelMap").appendChild(b)});
+ $("mapProgress").style.width=(completed.size/5*100)+"%";$("mapCount").textContent=`${completed.size} de 5 niveles completados`;
+}
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function startLevel(i){
+ current=i;matched=new Set();mistakes=0;selectedPic=null;selectedVerb=null;busy=false;
+ deck=shuffle(levels[i].data.map((v,index)=>({id:index,fi:v[0],es:v[1],emoji:v[2]})));
+ $("levelKicker").textContent=`NIVEL ${i+1} DE 5`; $("levelName").textContent=levels[i].name;
+ $("feedback").textContent="¡Relaciona las 20 parejas!";$("feedback").className="feedback";
+ renderCards();updateHud();show("game");
+}
+function renderCards(){
+ let pics=shuffle(deck),verbs=shuffle(deck);
+ $("pictureCards").innerHTML="";$("verbCards").innerHTML="";
+ pics.forEach(item=>{let b=document.createElement("button");b.className="match-card picture-card";b.dataset.id=item.id;b.setAttribute("aria-label","Ilustración "+(item.es));b.innerHTML=`<span class="picture">${item.emoji}</span><span class="translation">¿Qué acción es?</span>`;b.onclick=()=>selectPic(item.id,b);$("pictureCards").appendChild(b)});
+ verbs.forEach(item=>{let b=document.createElement("button");b.className="match-card verb-card";b.dataset.id=item.id;b.innerHTML=`<span class="verb">${item.fi}</span><span class="translation">${item.es}</span>`;b.onclick=()=>selectVerb(item.id,b);$("verbCards").appendChild(b)});
+}
+function selectPic(id,el){if(busy||matched.has(id))return;document.querySelectorAll(".picture-card").forEach(x=>x.classList.remove("selected"));selectedPic=id;el.classList.add("selected");tryMatch()}
+function selectVerb(id,el){if(busy||matched.has(id))return;document.querySelectorAll(".verb-card").forEach(x=>x.classList.remove("selected"));selectedVerb=id;el.classList.add("selected");tryMatch()}
+function tryMatch(){
+ if(selectedPic===null||selectedVerb===null)return;
+ let p=selectedPic,v=selectedVerb;selectedPic=null;selectedVerb=null;
+ let pe=document.querySelector(`.picture-card[data-id="${p}"]`),ve=document.querySelector(`.verb-card[data-id="${v}"]`);
+ if(p===v){
+  matched.add(p);pe.classList.remove("selected");ve.classList.remove("selected");pe.classList.add("matched");ve.classList.add("matched");
+  pe.innerHTML=pe.innerHTML+`<span class="mark">✅</span>`;ve.innerHTML=ve.innerHTML+`<span class="mark">✅</span>`;
+  $("feedback").textContent="¡Correcto! ¡Muy bien! ✓";$("feedback").className="feedback good";
+  updateHud();if(matched.size===20)setTimeout(finishLevel,500);
+ }else{
+  mistakes++;busy=true;pe.classList.add("wrong");ve.classList.add("wrong");pe.innerHTML+=`<span class="mark">❌</span>`;ve.innerHTML+=`<span class="mark">❌</span>`;
+  $("feedback").textContent="¡Ups! No coinciden. ¡Sigue intentando!";$("feedback").className="feedback bad";updateHud();
+  setTimeout(()=>{pe.classList.remove("wrong");ve.classList.remove("wrong");pe.querySelector(".mark")?.remove();ve.querySelector(".mark")?.remove();busy=false},650);
+ }
+}
+function updateHud(){$("mistakes").textContent=`❌ Errores: ${mistakes}`;$("matchedCount").textContent=`✅ Aciertos: ${matched.size}`;$("gameCount").textContent=`${matched.size} / 20 parejas`;$("gameProgress").style.width=(matched.size/20*100)+"%"}
+function finishLevel(){
+ if(mistakes===0){
+  completed.add(current+1);unlocked=Math.max(unlocked,Math.min(5,current+2));celebrate();
+  if(completed.size===5){show("final");return}
+  $("resultEmoji").textContent="🎉";$("resultTitle").textContent="¡Nivel completado!";$("resultText").textContent="felicidades, ahora puedes pasar al siguiente nivel.";
+  $("resultActions").innerHTML=`<button class="primary" onclick="startLevel(${current+1})">Siguiente nivel →</button><button class="secondary" onclick="showMap()">Ver niveles</button>`;
+ }else{
+  $("resultEmoji").textContent="😢";$("resultTitle").textContent="¡Casi lo consigues!";$("resultText").textContent="vuelve a intentarlo";
+  $("resultActions").innerHTML=`<button class="primary" onclick="startLevel(${current})">Reintentar nivel ↻</button><button class="secondary" onclick="showMap()">Volver a niveles</button>`;
+ }
+ show("levelResult");
+}
+function celebrate(){
+ const c=$("confetti");c.innerHTML="";const colors=["#005b9a","#ffffff","#e84c4f","#ffd45a","#16864a"];
+ for(let i=0;i<90;i++){let p=document.createElement("i");p.style.left=Math.random()*100+"%";p.style.background=colors[i%colors.length];p.style.animationDelay=Math.random()*.8+"s";p.style.transform=`rotate(${Math.random()*360}deg)`;c.appendChild(p)}
+ setTimeout(()=>c.innerHTML="",3500);
+}
+function restartAll(){completed.clear();unlocked=1;showMap()}
+</script>
+</body></html>
